@@ -8,5 +8,3 @@ export const env = {
   dbPassword: process.env.DB_PASSWORD!,
   dbName: process.env.DB_NAME!
 };
-
-console.log(env);
