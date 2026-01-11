@@ -1,5 +1,5 @@
 import { db } from "../../config/database";
-import { User } from "../models/users";
+import {  User } from "../models/users";
 
 export class UserService {
     
@@ -11,4 +11,5 @@ export class UserService {
     );
         return result.rows;
     }
+
 }

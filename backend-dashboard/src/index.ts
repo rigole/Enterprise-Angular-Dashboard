@@ -2,6 +2,7 @@
 import express from 'express';
 import { db } from './config/database';
 import { getAllUsers } from './modules/users/controllers';
+import { login, signup } from './modules/auth/controller';
 
 const app = express();
 app.use(express.json());
@@ -12,6 +13,8 @@ app.get('/health', async (_req, res) => {
 });
 
 app.get('/users', getAllUsers);
+app.post('/login', login);
+app.post('/signup', signup);
 
 app.listen(3000, () => {
   console.log(' Server running on http://localhost:3000');
