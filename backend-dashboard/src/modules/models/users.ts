@@ -1,5 +1,5 @@
 export interface User {
-  id: string;
+  id: string | null;
   email: string;
   role: string;
   created_at: Date;

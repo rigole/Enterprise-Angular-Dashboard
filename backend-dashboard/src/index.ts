@@ -3,7 +3,8 @@ import express from 'express';
 import { db } from './config/database';
 import { getAllUsers } from './modules/users/controllers';
 import { login, signup } from './modules/auth/controller';
-
+import { authMiddleware } from './middlewares/authmiddleware';
+import { getUserById } from './modules/users/controllers';
 const app = express();
 app.use(express.json());
 
@@ -12,9 +13,10 @@ app.get('/health', async (_req, res) => {
   res.json({ status: 'ok', time: result.rows[0] });
 });
 
-app.get('/users', getAllUsers);
+app.get('/users', authMiddleware, getAllUsers);
 app.post('/login', login);
 app.post('/signup', signup);
+app.get('/users/:id', authMiddleware, getUserById);
 
 app.listen(3000, () => {
   console.log(' Server running on http://localhost:3000');
