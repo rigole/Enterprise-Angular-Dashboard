@@ -1,0 +1,96 @@
+.singup-div{
+    background-color: f6f6f8;
+}
+
+.topAppBar{
+    display: flex; 
+    overflow-x: hidden; 
+    position: relative; 
+    flex-direction: column; 
+    width: 100%; 
+    height: auto; 
+    min-height: 100vh; 
+    background-color: #ffffff; 
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
+    max-width: 480px;
+}
+
+.header-signup{
+    display: flex; 
+    padding: 1rem; 
+    padding-bottom: 0.5rem; 
+    justify-content: space-between; 
+    align-items: center; 
+    background-color: #ffffff; 
+}
+
+.arrow-back{
+    display: flex; 
+    shrink: 0; 
+    align-items: center; 
+    cursor: pointer;
+}
+.title-signup{
+    padding-right: 3rem; 
+    flex: 1 1 0%; 
+    font-size: 1.125rem;
+    line-height: 1.75rem; 
+    font-weight: 700; 
+    text-align: center; 
+    color: #111318;
+}
+
+.head-text{
+    padding-left: 1rem;
+    padding-right: 1rem; 
+}
+
+.account-text{
+    padding-bottom: 0.5rem; 
+    padding-top: 1.5rem; 
+    font-weight: 700; 
+    line-height: 1.25; 
+    text-align: center; 
+    color: #111318;
+    font-size: 32px;
+}
+
+.account-details{
+    margin-bottom: 1.5rem; 
+    font-size: 0.875rem;
+    line-height: 1.25rem; 
+    text-align: center; 
+    color: #616f89;
+}
+
+.signup-form{
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.25rem; 
+}
+
+.namefield{
+    display: flex; 
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem; 
+    padding-left: 1rem;
+    padding-right: 1rem; 
+    flex-wrap: wrap; 
+    gap: 1rem; 
+    align-items: flex-end; 
+}
+
+.label_firstname{
+    display: flex; 
+    flex-direction: column; 
+    flex: 1 1 0%; 
+}
+
+.label_paragraph{
+    padding-bottom: 0.5rem; 
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    font-weight: 500; 
+    line-height: 1.5; 
+    color: #111318;
+}
