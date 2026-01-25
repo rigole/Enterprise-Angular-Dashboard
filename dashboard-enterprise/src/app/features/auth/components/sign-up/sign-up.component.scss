@@ -1,5 +1,7 @@
 .singup-div{
-    background-color: f6f6f8;
+    background-color: #f6f6f8;
+    min-height: max(884px, 100dvh);
+    max-width: 480px;
 }
 
 .topAppBar{
@@ -20,7 +22,6 @@
     padding: 1rem; 
     padding-bottom: 0.5rem; 
     justify-content: space-between; 
-    align-items: center; 
     background-color: #ffffff; 
 }
 
@@ -94,3 +95,24 @@
     line-height: 1.5; 
     color: #111318;
 }
+
+.form-input{
+    display: flex; 
+    overflow: hidden; 
+    flex: 1 1 0%; 
+    border-radius: 0.5rem; 
+    border-width: 1px; 
+    width: 100%; 
+    min-width: 0; 
+    height: 3.5rem; 
+    font-size: 1rem;
+    line-height: 1.5rem; 
+    font-weight: 400; 
+    line-height: 1.5; 
+    background-color: #ffffff; 
+    resize: none; 
+    color: #111318;
+    border-color: #dbdfe6;
+    padding: 15px;
+}
+

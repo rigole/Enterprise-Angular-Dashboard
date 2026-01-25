@@ -13,10 +13,10 @@ app.get('/health', async (_req, res) => {
   res.json({ status: 'ok', time: result.rows[0] });
 });
 
-app.get('/users', authMiddleware, getAllUsers);
+app.get('/employees', authMiddleware, getAllUsers);
 app.post('/login', login);
 app.post('/signup', signup);
-app.get('/users/:id', authMiddleware, getUserById);
+app.get('/employees/:id', authMiddleware, getUserById);
 
 app.listen(3000, () => {
   console.log(' Server running on http://localhost:3000');
