@@ -1,7 +1,10 @@
 .singup-div{
     background-color: #f6f6f8;
-    min-height: max(884px, 100dvh);
-    max-width: 480px;
+    min-height: 100vh; 
+    background-image:  url('/img/angular.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .topAppBar{
@@ -11,6 +14,8 @@
     flex-direction: column; 
     width: 100%; 
     height: auto; 
+    margin-left: auto;
+    margin-right: auto;
     min-height: 100vh; 
     background-color: #ffffff; 
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); 
@@ -72,8 +77,8 @@
 
 .namefield{
     display: flex; 
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem; 
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem; 
     padding-left: 1rem;
     padding-right: 1rem; 
     flex-wrap: wrap; 
