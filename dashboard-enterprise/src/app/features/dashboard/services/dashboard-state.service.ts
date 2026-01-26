@@ -1,10 +1,9 @@
-import { computed, signal } from "@angular/core";
+import {Injectable, computed, signal } from "@angular/core";
 import { DashboardApiService } from "./dashboard.service";
 
-
-
-
-
+@Injectable({
+  providedIn: 'root'
+})
 export class DashboardStateService {
     private readonly _loading = signal(false)
     private readonly _employees = signal<any[]>([]);
@@ -20,7 +19,7 @@ export class DashboardStateService {
 
   constructor(private api: DashboardApiService) {}
 
-  loadItems() {
+  loadEmployees() {
     this._loading.set(true);
     this._error.set(null);
 
