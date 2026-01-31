@@ -6,7 +6,7 @@ export class UserService {
     
     async getAllUsers(): Promise<User[]> {
        const result = await db.query<User>(
-      `SELECT id, email, role, created_at
+      `SELECT first_name, last_name, work_anniversary,date_of_birth,profession,phone_number, email, role, created_at 
        FROM users
        ORDER BY created_at DESC`
     );
