@@ -14,13 +14,20 @@ export class DashboardComponent {
     users!: Signal<any[]>;
     loading!: Signal<boolean>;
     error!: Signal<string | null>;
+    search!: Signal<string>;
     
     constructor(private dashboardStateService: DashboardStateService) { }
     
     ngOnInit(): void {
-        this.users = this.dashboardStateService.employees;
+        this.users = this.dashboardStateService.filteredEmployees;
         this.loading = this.dashboardStateService.loading;
+        this.search = this.dashboardStateService.searchTerm;
         this.error = this.dashboardStateService.error;
         this.dashboardStateService.loadEmployees();
     }
+
+    onSearchChange(value: string) {
+      console.log(value);
+    this.dashboardStateService.setSearchTerm(value);
+  }
   }

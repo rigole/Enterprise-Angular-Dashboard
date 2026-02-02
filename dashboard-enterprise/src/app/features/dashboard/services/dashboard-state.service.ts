@@ -21,9 +21,9 @@ export class DashboardStateService {
     readonly filteredEmployees = computed(() => {
       const term = this._searchTerm().toLowerCase();
       return this._employees().filter(employee =>
-        employee.first_name.toLowerCase().includes(term) ||
-        employee.last_name.toLowerCase().includes(term) ||
-        employee.email.toLowerCase().includes(term)
+        employee.first_name?.toLowerCase().includes(term) ||
+        employee.last_name?.toLowerCase().includes(term) ||
+        employee.email?.toLowerCase().includes(term)
       );
     });
 
