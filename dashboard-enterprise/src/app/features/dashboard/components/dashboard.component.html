@@ -1,0 +1,25 @@
+<p-table [value]="users()" [loading]="loading()" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>occupation</th>
+      <th>tenure</th>
+      <th>Rôle</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-user>
+    <tr>
+      <td>{{ user.first_name }}</td>
+      <td>{{ user.last_name }}</td>
+      <td>{{ user.phone_number }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.profession }}</td>
+      <td>{{ user.work_anniversary ? (user.work_anniversary | date:'dd/MM/yyyy') : 'dd/MM/yyyy' }}</td>
+      <td>{{ user.role }}</td>
+    </tr>
+  </ng-template>
+</p-table>
