@@ -61,6 +61,10 @@
     font-size: 32px;
 }
 
+.signup-button{
+    padding: 1rem;
+}
+
 .account-details{
     margin-bottom: 1.5rem; 
     font-size: 0.875rem;
@@ -76,14 +80,14 @@
 }
 
 .namefield{
-    display: flex; 
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem; 
-    padding-left: 1rem;
-    padding-right: 1rem; 
-    flex-wrap: wrap; 
-    gap: 1rem; 
-    align-items: flex-end; 
+    padding: 1rem;
+}
+
+.signup-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .label_firstname{
@@ -120,4 +124,3 @@
     border-color: #dbdfe6;
     padding: 15px;
 }
-

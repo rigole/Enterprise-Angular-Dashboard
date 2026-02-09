@@ -7,45 +7,74 @@
             <h2 class="title-signup">Sign Up</h2>
         </div>
         <div class="head-text">
-            <h1 class="account-text">Create your Account</h1>
-            <p class="account-details">Please enter your details to get started with our platform</p>
+            <h1 class="account-text">Add new employee</h1>
+            <p class="account-details">Please enter the details of the new employee</p>
         </div>
-        <form action="" class="signup-form">
+        <form action="" [formGroup]="userForm" class="signup-form">
             <div class="namefield">
-                <label class="label_firstname" for="">
-                    <p class="label_paragraph">first name</p>
-                    <input type="text" placeholder="Enter your first name" class="form-input">
-                </label>
+                <p-floatlabel variant="on">
+                    <input w-full pInputText type="text" class="form-input" formControlName="firstName">
+                    <label for="first name">First name</label>
+                </p-floatlabel>
+
+                <p-message severity="error" text="Required"
+                    *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+                </p-message>
             </div>
 
             <div class="namefield">
-                <label class="label_firstname" for="">
-                    <p class="label_paragraph">last name</p>
-                    <input type="text" placeholder="Enter your last name" class="form-input">
-                </label>
-            </div>
-
-
-            <div class="namefield">
-                <label class="label_firstname" for="">
-                    <p class="label_paragraph">email</p>
-                    <input type="email" placeholder="Enter your email" class="form-input">
-                </label>
-            </div>
-
-            <div class="namefield">
-                <label class="label_firstname" for="">
-                    <p class="label_paragraph">password</p>
-                    <input type="password" placeholder="Enter your password" class="form-input">
-                </label>
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="lastName" class="form-input">
+                    <label for="last name">Last name</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+                </p-message>
             </div>
 
 
             <div class="namefield">
-                <label class="label_firstname" for="">
-                    <p class="label_paragraph">password</p>
-                    <input type="password" placeholder="confirm your password" class="form-input">
-                </label>
+                <p-floatlabel variant="on">
+                    <input pInputText type="email" formControlName="email" class="form-input">
+                    <label for="email">Email</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Enter a valid email address"
+                    *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                </p-message>
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="phone" class="form-input">
+                    <label for="phone number">phone number</label>
+                </p-floatlabel>
+                <p-message severity="error" text="enter a valid phone number"
+                    *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                </p-message>
+            </div>
+
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="profession" class="form-input">
+                    <label for="profession">profession</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="userForm.get('profession')?.invalid && userForm.get('profession')?.touched">
+                </p-message>
+            </div>
+
+            <div class="namefield">
+
+                <p-datepicker formControlName="date" />
+                <p-message severity="error" text="Required"
+                    *ngIf="userForm.get('date')?.invalid && userForm.get('date')?.touched">
+                </p-message>
+
+            </div>
+
+            <div>
+                <p-button [style]="{width: '100%'}" class="signup-button" label="Sign Up"></p-button>
             </div>
         </form>
     </div>
