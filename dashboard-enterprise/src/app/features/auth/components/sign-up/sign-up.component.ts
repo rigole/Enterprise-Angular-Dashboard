@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Signal } from '@angular/core';
 import { MODULES_IMPORTS } from '../../../../shared/utils/primeng-imports';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sign-up',
@@ -11,8 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
-export class SignUpComponent {
+export class SignUpComponent implements OnInit  {
   public userForm!: FormGroup;
+  formValueSignal!: Signal<any>;
   constructor(private fb: FormBuilder) {
       this.userForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -22,5 +24,14 @@ export class SignUpComponent {
       profession: ['', Validators.required],
       date: ['', Validators.required]
     })
+    this.formValueSignal = toSignal(this.userForm.valueChanges, {
+      initialValue: this.userForm.value
+    });
+
   }
+
+ ngOnInit() {
+    
+  }
+
 }

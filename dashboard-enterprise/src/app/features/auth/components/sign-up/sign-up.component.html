@@ -72,14 +72,15 @@
             </div>
 
             <div class="namefield">
-
-                <p-datepicker formControlName="date" />
-                <p-message severity="error" text="Required"
-                    *ngIf="(userForm.controls['date'].dirty || userForm.controls['date'].touched) && userForm.get('date')?.errors?.['required']">
-                </p-message>
+                <p-floatlabel variant="on">
+                    <p-datepicker formControlName="date" [style]="{width: '100%'}" />
+                    <label for="date">Date</label>
+                    <p-message severity="error" text="Required"
+                        *ngIf="(userForm.controls['date'].dirty || userForm.controls['date'].touched) && userForm.get('date')?.errors?.['required']">
+                    </p-message>
+                </p-floatlabel>
 
             </div>
-
             <div>
                 <p-button [style]="{width: '100%'}" class="signup-button" label="Sign Up"></p-button>
             </div>
