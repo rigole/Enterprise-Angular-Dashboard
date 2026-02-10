@@ -18,7 +18,7 @@
                 </p-floatlabel>
 
                 <p-message severity="error" text="Required"
-                    *ngIf="userForm.get('firstName')?.invalid && userForm.get('firstName')?.touched">
+                    *ngIf="(userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched) && userForm.get('firstName')?.errors?.['required']">
                 </p-message>
             </div>
 
@@ -28,7 +28,7 @@
                     <label for="last name">Last name</label>
                 </p-floatlabel>
                 <p-message severity="error" text="Required"
-                    *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+                    *ngIf="(userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched) && userForm.get('lastName')?.errors?.['required']">
                 </p-message>
             </div>
 
@@ -38,8 +38,11 @@
                     <input pInputText type="email" formControlName="email" class="form-input">
                     <label for="email">Email</label>
                 </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['email'].dirty || userForm.controls['email'].touched) && userForm.get('email')?.errors?.['required']">
+                </p-message>
                 <p-message severity="error" text="Enter a valid email address"
-                    *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                    *ngIf="(userForm.controls['email'].dirty || userForm.controls['email'].touched)&& userForm.get('email')?.errors?.['email']">
                 </p-message>
             </div>
 
@@ -48,8 +51,12 @@
                     <input pInputText type="text" formControlName="phone" class="form-input">
                     <label for="phone number">phone number</label>
                 </p-floatlabel>
-                <p-message severity="error" text="enter a valid phone number"
-                    *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['phone'].dirty || userForm.controls['phone'].touched) && userForm.get('phone')?.errors?.['required']">
+                </p-message>
+
+                <p-message severity="error" text="Only number are allowed"
+                    *ngIf="(userForm.controls['phone'].dirty || userForm.controls['phone'].touched)&& userForm.get('phone')?.errors?.['pattern']">
                 </p-message>
             </div>
 
@@ -60,7 +67,7 @@
                     <label for="profession">profession</label>
                 </p-floatlabel>
                 <p-message severity="error" text="Required"
-                    *ngIf="userForm.get('profession')?.invalid && userForm.get('profession')?.touched">
+                    *ngIf="(userForm.controls['profession'].dirty || userForm.controls['profession'].touched) && userForm.get('profession')?.errors?.['required']">
                 </p-message>
             </div>
 
@@ -68,7 +75,7 @@
 
                 <p-datepicker formControlName="date" />
                 <p-message severity="error" text="Required"
-                    *ngIf="userForm.get('date')?.invalid && userForm.get('date')?.touched">
+                    *ngIf="(userForm.controls['date'].dirty || userForm.controls['date'].touched) && userForm.get('date')?.errors?.['required']">
                 </p-message>
 
             </div>
