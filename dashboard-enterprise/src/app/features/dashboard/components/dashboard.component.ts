@@ -28,7 +28,6 @@ export class DashboardComponent {
   }
 
   onSearchChange(value: string) {
-    console.log(value);
     this.dashboardStateService.setSearchTerm(value);
   }
 }

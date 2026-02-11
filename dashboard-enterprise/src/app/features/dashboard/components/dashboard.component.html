@@ -5,8 +5,11 @@
     <p-button severity="danger" label="sign Out" routerLink="/auth/add-employee"></p-button>
   </div>
 </div>
-<input #searchInput class="search-input" pInputText type="text" placeholder="Rechercher"
-  (input)="onSearchChange(searchInput.value)" />
+<div class="search">
+  <input #searchInput class="search-input" pInputText type="text" placeholder="Search"
+    (input)="onSearchChange(searchInput.value)" />
+</div>
+
 
 <p-table [value]="users()" [loading]="loading()" [paginator]="true" [rows]="10" responsiveLayout="scroll">
   <ng-template pTemplate="header">
