@@ -4,19 +4,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
-  selector: 'app-sign-up',
-  imports: [MODULES_IMPORTS ],
-  templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.scss'
+  selector: 'app-add-employee',
+  imports: [MODULES_IMPORTS],
+  templateUrl: './add-employee.component.html',
+  styleUrl: './add-employee.component.scss'
 })
 
-
-
-export class SignUpComponent implements OnInit  {
+export class AddEmployeeComponent implements OnInit {
   public userForm!: FormGroup;
   formValueSignal!: Signal<any>;
   constructor(private fb: FormBuilder) {
-      this.userForm = this.fb.group({
+    this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -27,11 +25,8 @@ export class SignUpComponent implements OnInit  {
     this.formValueSignal = toSignal(this.userForm.valueChanges, {
       initialValue: this.userForm.value
     });
-
   }
 
- ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
 }
