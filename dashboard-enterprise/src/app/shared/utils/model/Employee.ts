@@ -10,8 +10,3 @@ export interface Employee {
   firstName: string;
   lastName: string;
 }
-
-export interface UserInput {
-  email: string;
-  password: string;
-}

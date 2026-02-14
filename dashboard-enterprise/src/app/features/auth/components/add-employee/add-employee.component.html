@@ -73,16 +73,27 @@
 
             <div class="namefield">
                 <p-floatlabel variant="on">
-                    <p-datepicker formControlName="date" [style]="{width: '100%'}" />
-                    <label for="date">Date</label>
+                    <p-datepicker formControlName="dateOfBirth" [style]="{width: '100%'}" />
+                    <label for="date">Date of Birth</label>
                     <p-message severity="error" text="Required"
-                        *ngIf="(userForm.controls['date'].dirty || userForm.controls['date'].touched) && userForm.get('date')?.errors?.['required']">
+                        *ngIf="(userForm.controls['dateOfBirth'].dirty || userForm.controls['dateOfBirth'].touched) && userForm.get('dateOfBirth')?.errors?.['required']">
+                    </p-message>
+                </p-floatlabel>
+
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <p-datepicker formControlName="hiringDate" [style]="{width: '100%'}" />
+                    <label for="date">Hiring Date</label>
+                    <p-message severity="error" text="Required"
+                        *ngIf="(userForm.controls['hiringDate'].dirty || userForm.controls['hiringDate'].touched) && userForm.get('hiringDate')?.errors?.['required']">
                     </p-message>
                 </p-floatlabel>
 
             </div>
             <div>
-                <p-button [style]="{width: '100%'}" class="signup-button" label="Sign Up"></p-button>
+                <p-button [style]="{width: '100%'}" (click)="addEmployee()" class="signup-button" label="Sign Up"></p-button>
             </div>
         </form>
     </div>

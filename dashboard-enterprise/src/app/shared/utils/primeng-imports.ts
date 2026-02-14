@@ -6,6 +6,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 export const  MODULES_IMPORTS = [
   FloatLabelModule,
@@ -15,5 +16,6 @@ export const  MODULES_IMPORTS = [
   DatePickerModule,
   ReactiveFormsModule,
   MessageModule,
-  CommonModule
+  CommonModule,
+  RouterModule
 ];

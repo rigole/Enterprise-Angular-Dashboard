@@ -30,4 +30,21 @@ export class DashboardComponent {
   onSearchChange(value: string) {
     this.dashboardStateService.setSearchTerm(value);
   }
+
+  calculateTenure(anniversary: string | Date): string {
+    if (!anniversary) return 'N/A';
+
+    const start = new Date(anniversary);
+    const today = new Date();
+    const diffInMs = today.getTime() - start.getTime();
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    const years = Math.floor(diffInDays / 365.25);
+    const months = Math.floor((diffInDays % 365.25) / 30.44);
+
+    if (years > 0) {
+      return `${years} years, ${months} months`;
+    } else {
+      return `${months} months`;
+    }
+  }
 }

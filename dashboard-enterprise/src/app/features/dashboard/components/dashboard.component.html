@@ -31,7 +31,9 @@
       <td>{{ user.phone_number }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.profession }}</td>
-      <td>{{ user.work_anniversary ? (user.work_anniversary | date:'dd/MM/yyyy') : 'dd/MM/yyyy' }}</td>
+      <td>
+        {{  calculateTenure(user.hiring_date)}}
+      </td>
       <td>{{ user.role }}</td>
     </tr>
   </ng-template>
