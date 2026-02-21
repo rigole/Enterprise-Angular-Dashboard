@@ -57,7 +57,15 @@ export class AddEmployeeComponent implements OnInit {
         outlined: true
       },
       accept: () => {
-        this.authStateService.addEmployee(this.formValueSignal())
+        this.authStateService.addEmployee(this.formValueSignal()).subscribe({
+          next: () => {
+            this.alertService.showSuccessToast('Employee added successfully');
+            this.userForm.reset();
+          },
+          error: () => {
+            this.alertService.showErrorToast('Failed to add employee');
+          }
+        })
       },
       reject: () => {
         this.alertService.showErrorToast('Failed to add employee');
