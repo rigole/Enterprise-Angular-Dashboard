@@ -1,0 +1,102 @@
+<div class="singup-div">
+    <div class="topAppBar">
+        <div class="header-signup">
+            <div class="arrow-back">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </div>
+            <h2 class="title-signup">Employee Adding</h2>
+        </div>
+        <div class="head-text">
+            <h1 class="account-text">Add new employee</h1>
+            <p class="account-details">Please enter the details of the new employee</p>
+        </div>
+        <form action="" [formGroup]="userForm" class="signup-form">
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input w-full pInputText type="text" class="form-input" formControlName="firstName">
+                    <label for="first name">First name</label>
+                </p-floatlabel>
+
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['firstName'].dirty || userForm.controls['firstName'].touched) && userForm.get('firstName')?.errors?.['required']">
+                </p-message>
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="lastName" class="form-input">
+                    <label for="last name">Last name</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['lastName'].dirty || userForm.controls['lastName'].touched) && userForm.get('lastName')?.errors?.['required']">
+                </p-message>
+            </div>
+
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="email" formControlName="email" class="form-input">
+                    <label for="email">Email</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['email'].dirty || userForm.controls['email'].touched) && userForm.get('email')?.errors?.['required']">
+                </p-message>
+                <p-message severity="error" text="Enter a valid email address"
+                    *ngIf="(userForm.controls['email'].dirty || userForm.controls['email'].touched)&& userForm.get('email')?.errors?.['email']">
+                </p-message>
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="phone" class="form-input">
+                    <label for="phone number">phone number</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['phone'].dirty || userForm.controls['phone'].touched) && userForm.get('phone')?.errors?.['required']">
+                </p-message>
+
+                <p-message severity="error" text="Only number are allowed"
+                    *ngIf="(userForm.controls['phone'].dirty || userForm.controls['phone'].touched)&& userForm.get('phone')?.errors?.['pattern']">
+                </p-message>
+            </div>
+
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <input pInputText type="text" formControlName="profession" class="form-input">
+                    <label for="profession">profession</label>
+                </p-floatlabel>
+                <p-message severity="error" text="Required"
+                    *ngIf="(userForm.controls['profession'].dirty || userForm.controls['profession'].touched) && userForm.get('profession')?.errors?.['required']">
+                </p-message>
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <p-datepicker formControlName="dateOfBirth" [style]="{width: '100%'}" />
+                    <label for="date">Date of Birth</label>
+                    <p-message severity="error" text="Required"
+                        *ngIf="(userForm.controls['dateOfBirth'].dirty || userForm.controls['dateOfBirth'].touched) && userForm.get('dateOfBirth')?.errors?.['required']">
+                    </p-message>
+                </p-floatlabel>
+
+            </div>
+
+            <div class="namefield">
+                <p-floatlabel variant="on">
+                    <p-datepicker formControlName="hiringDate" [style]="{width: '100%'}" />
+                    <label for="date">Hiring Date</label>
+                    <p-message severity="error" text="Required"
+                        *ngIf="(userForm.controls['hiringDate'].dirty || userForm.controls['hiringDate'].touched) && userForm.get('hiringDate')?.errors?.['required']">
+                    </p-message>
+                </p-floatlabel>
+
+            </div>
+            <div>
+                <p-button [style]="{width: '100%'}" (click)="addEmployee()" class="signup-button"
+                    label="Sign Up"></p-button>
+            </div>
+        </form>
+    </div>
+</div>
+<p-confirmDialog></p-confirmDialog>

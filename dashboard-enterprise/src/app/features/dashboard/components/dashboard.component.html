@@ -1,3 +1,16 @@
+<div class="header">
+  <span>Good morning User Name</span>
+  <div class="buttons-header">
+    <p-button [style]="{marginRight: '2em'}" label="Add Employee" routerLink="/auth/add-employee"></p-button>
+    <p-button severity="danger" label="sign Out" routerLink="/auth/add-employee"></p-button>
+  </div>
+</div>
+<div class="search">
+  <input #searchInput class="search-input" pInputText type="text" placeholder="Search"
+    (input)="onSearchChange(searchInput.value)" />
+</div>
+
+
 <p-table [value]="users()" [loading]="loading()" [paginator]="true" [rows]="10" responsiveLayout="scroll">
   <ng-template pTemplate="header">
     <tr>
@@ -18,8 +31,13 @@
       <td>{{ user.phone_number }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.profession }}</td>
-      <td>{{ user.work_anniversary ? (user.work_anniversary | date:'dd/MM/yyyy') : 'dd/MM/yyyy' }}</td>
+      <td>
+        {{  calculateTenure(user.hiring_date)}}
+      </td>
       <td>{{ user.role }}</td>
     </tr>
   </ng-template>
 </p-table>
+
+<p *ngIf="loading()">Loading...</p>
+<p *ngIf="error()">{{ error() }}</p>

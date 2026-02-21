@@ -1,7 +1,7 @@
 
 import express from 'express';
 import { db } from './config/database';
-import { getAllUsers } from './modules/users/controllers';
+import { createUser, getAllUsers } from './modules/users/controllers';
 import { login, signup } from './modules/auth/controller';
 import { authMiddleware } from './middlewares/authmiddleware';
 import { getUserById } from './modules/users/controllers';
@@ -19,6 +19,7 @@ app.get('/health', async (_req, res) => {
 app.get('/employees', getAllUsers);
 app.post('/login', login);
 app.post('/signup', signup);
+app.post('/add/employee', createUser);
 app.get('/employees/:id', authMiddleware, getUserById);
 
 app.listen(3000, () => {

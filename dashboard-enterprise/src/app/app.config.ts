@@ -5,7 +5,8 @@ import { providePrimeNG } from 'primeng/config';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
 import Aura from '@primeuix/themes/aura';
-
+import { MessageService } from 'primeng/api';
+import { AlertService } from './shared/utils/alert.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -14,9 +15,14 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
        theme : {
-          preset: Aura 
+          preset: Aura,
+          options: {
+          darkModeSelector: false
+          }
         }
   }),
-    provideHttpClient()
+    provideHttpClient(),
+    MessageService,
+    AlertService
   ]
 };

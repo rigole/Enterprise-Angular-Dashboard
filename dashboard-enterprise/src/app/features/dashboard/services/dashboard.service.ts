@@ -11,6 +11,6 @@ export class DashboardApiService {
   constructor(private http: HttpClient) {}
 
   getEmployees(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + '/employees');
+    return this.http.get<any[]>(`${this.baseUrl}/employees`);
   }
 }
