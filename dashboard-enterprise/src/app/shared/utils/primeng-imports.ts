@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
 
 export const  MODULES_IMPORTS = [
   FloatLabelModule,
@@ -17,5 +18,6 @@ export const  MODULES_IMPORTS = [
   ReactiveFormsModule,
   MessageModule,
   CommonModule,
-  RouterModule
+  RouterModule,
+  ToastModule
 ];

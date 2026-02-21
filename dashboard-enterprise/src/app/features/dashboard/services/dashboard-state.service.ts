@@ -1,10 +1,16 @@
 import { Injectable, computed, signal } from "@angular/core";
 import { DashboardApiService } from "./dashboard.service";
+import { AlertService } from "../../../shared/utils/alert.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardStateService {
+
+  constructor(private api: DashboardApiService,
+    private alertService: AlertService) { }
+
+
   private readonly _loading = signal(false)
   private readonly _employees = signal<any[]>([]);
   private readonly _error = signal<string | null>(null);
@@ -27,15 +33,17 @@ export class DashboardStateService {
     );
   });
 
-  constructor(private api: DashboardApiService) { }
+
 
   loadEmployees() {
+
     this._loading.set(true);
     this._error.set(null);
 
     this.api.getEmployees().subscribe({
       next: (employees: any[]) => {
         this._employees.set(employees);
+        this.alertService.showSuccessToast('Employees loaded successfully');
         this._loading.set(false);
       },
       error: () => {

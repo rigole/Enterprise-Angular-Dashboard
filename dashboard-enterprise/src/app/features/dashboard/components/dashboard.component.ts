@@ -3,6 +3,7 @@ import { DashboardStateService } from '../services/dashboard-state.service';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { MODULES_IMPORTS } from '../../../shared/utils/primeng-imports';
+import { AlertService } from '../../../shared/utils/alert.service';
 
 
 @Component({
