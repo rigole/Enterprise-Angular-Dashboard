@@ -1,10 +1,13 @@
 import {Injectable, computed, signal } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { Employee } from "../../../shared/utils/model/Employee";
+import { AlertService } from "../../../shared/utils/alert.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthStateService {
     private readonly _loading = signal(false)
     private readonly _employee = signal<Employee[]>([]);
@@ -13,7 +16,7 @@ export class AuthStateService {
     readonly employee = this._employee.asReadonly();
     readonly error = this._error.asReadonly();
 
-    constructor(private api: AuthService) {}
+    constructor(private api: AuthService, private alertService: AlertService) {}
 
 
     addEmployee(employee: Employee) {
@@ -24,9 +27,11 @@ export class AuthStateService {
       next: (newEmployee: any) => {
         this._employee.update(employees => [...employees, newEmployee]);
         this._loading.set(false);
+        this.alertService.showSuccessToast('Employee added successfully');
       },
       error: () => {
-        this._error.set('Failed to load dashboard items');
+        this._error.set('Failed to add employee');
+        this.alertService.showErrorToast('Failed to add employee');
         this._loading.set(false);
       }
     });

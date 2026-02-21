@@ -12,7 +12,7 @@ export class AlertService {
             severity: 'success',
             summary: 'Success',
             detail: message,
-            life: 3500
+            life: 2500
         });
     }
 
@@ -21,7 +21,7 @@ export class AlertService {
             severity: 'error',
             summary: 'Error',
             detail: message,
-            life: 3500
+            life: 2500
         });
     }
 
@@ -30,7 +30,7 @@ export class AlertService {
             severity: 'warn',
             summary: 'Warning',
             detail: message,
-            life: 3500
+            life: 2500
         });
     }
 }

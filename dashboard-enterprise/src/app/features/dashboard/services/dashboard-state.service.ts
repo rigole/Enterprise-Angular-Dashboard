@@ -36,7 +36,6 @@ export class DashboardStateService {
 
 
   loadEmployees() {
-
     this._loading.set(true);
     this._error.set(null);
 
@@ -48,6 +47,7 @@ export class DashboardStateService {
       },
       error: () => {
         this._error.set('Failed to load dashboard items');
+        this.alertService.showErrorToast('Failed to load dashboard items');
         this._loading.set(false);
       }
     });
