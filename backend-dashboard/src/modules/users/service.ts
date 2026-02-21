@@ -1,4 +1,4 @@
-import { log } from "node:console";
+import crypto from "crypto";
 import { db } from "../../config/database";
 import { Employee } from "../models/users";
 
@@ -24,11 +24,12 @@ export class UserService {
     }
 
     async createUser(employee: Employee): Promise<Employee> {
+        const activation_token = crypto.randomUUID();
         const result = await db.query<Employee>(
-            `INSERT INTO employees (first_name, last_name, hiring_date,date_of_birth,profession,phone_number, email, role, created_at)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            `INSERT INTO employees (first_name, last_name, hiring_date,date_of_birth,profession,phone_number, email, role, created_at,password,activation_token)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11)
             RETURNING *`,
-            [employee.firstName, employee.lastName, employee.hiringDate, employee.dateOfBirth, employee.profession, employee.phone, employee.email, "employee"  , new Date()]
+            [employee.firstName, employee.lastName, employee.hiringDate, employee.dateOfBirth, employee.profession, employee.phone, employee.email, "employee", new Date(), "", activation_token]
         );
         return result.rows[0];
     }
