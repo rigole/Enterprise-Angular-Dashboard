@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import { db } from "../../config/database";
 import { Employee } from "../models/users";
+import bcrypt from "bcrypt";
 
 export class UserService {
 
@@ -30,6 +31,19 @@ export class UserService {
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11)
             RETURNING *`,
             [employee.firstName, employee.lastName, employee.hiringDate, employee.dateOfBirth, employee.profession, employee.phone, employee.email, "employee", new Date(), "", activation_token]
+        );
+        return result.rows[0];
+    }
+
+    async setEmployeePassword(token:string, password:string):Promise<Employee | null>{
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const result = await db.query<Employee>(
+            `UPDATE employees
+            SET password = $1,
+            activation_token = NULL
+            WHERE activation_token = $2
+            RETURNING *`,
+            [hashedPassword, token]
         );
         return result.rows[0];
     }

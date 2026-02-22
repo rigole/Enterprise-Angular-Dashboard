@@ -38,3 +38,17 @@ export const createUser = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 }
+
+export const setEmployeePassword = async (req: Request, res: Response) => {
+    try {
+        const { token, password } = req.body;
+        const result = await userService.setEmployeePassword(token, password);
+        if (!result) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        res.status(200).json({ message: 'Password set successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
