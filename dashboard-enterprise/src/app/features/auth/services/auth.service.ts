@@ -14,4 +14,8 @@ export class AuthService {
     addEmployee(employee: Employee) {
         return this.http.post(`${this.baseUrl}/add/employee`, employee);
     }
+
+    setEmployeePassword(token: string, password: string) {
+        return this.http.post(`${this.baseUrl}/set-employee-password`, { token, password });
+    }
 }

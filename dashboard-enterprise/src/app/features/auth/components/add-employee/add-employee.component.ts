@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, computed, OnInit, Signal } from '@angular/core';
 import { MODULES_IMPORTS } from '../../../../shared/utils/primeng-imports';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -20,6 +20,7 @@ import { label } from '@primeuix/themes/aura/metergroup';
 export class AddEmployeeComponent implements OnInit {
   public userForm!: FormGroup;
   formValueSignal!: Signal<any>;
+  
   constructor(private fb: FormBuilder,
     private authStateService: AuthStateService,
     private confirmService: ConfirmationService,
@@ -36,6 +37,7 @@ export class AddEmployeeComponent implements OnInit {
     this.formValueSignal = toSignal(this.userForm.valueChanges, {
       initialValue: this.userForm.value
     });
+    
   }
 
   ngOnInit() { }
@@ -60,7 +62,8 @@ export class AddEmployeeComponent implements OnInit {
         this.authStateService.addEmployee(this.formValueSignal()).subscribe({
           next: () => {
             this.alertService.showSuccessToast('Employee added successfully');
-            this.userForm.reset();
+            //this.router.navigate(['/set-employee-password', this.formValueSignal().token]);
+            this.userForm.reset();  
           },
           error: () => {
             this.alertService.showErrorToast('Failed to add employee');
