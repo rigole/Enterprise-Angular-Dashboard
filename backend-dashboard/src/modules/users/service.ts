@@ -27,7 +27,7 @@ export class UserService {
     async createUser(employee: Employee): Promise<Employee> {
         const activation_token = crypto.randomUUID();
         const result = await db.query<Employee>(
-            `INSERT INTO employees (first_name, last_name, hiring_date,date_of_birth,profession,phone_number, email, role, created_at,password,activation_token)
+            `INSERT INTO employees (first_name, last_name, hiring_date,date_of_birth,profession,phone_number, email, role, created_at,password, activation_token)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11)
             RETURNING *`,
             [employee.firstName, employee.lastName, employee.hiringDate, employee.dateOfBirth, employee.profession, employee.phone, employee.email, "employee", new Date(), "", activation_token]
@@ -35,7 +35,7 @@ export class UserService {
         return result.rows[0];
     }
 
-    async setEmployeePassword(token:string, password:string):Promise<Employee | null>{
+    async setEmployeePassword(token: string, password: string): Promise<Employee | null> {
         const hashedPassword = await bcrypt.hash(password, 10);
         const result = await db.query<Employee>(
             `UPDATE employees

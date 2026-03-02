@@ -4,7 +4,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../../../../shared/utils/alert.service';
 import { AuthStateService } from '../../services/auth-state.services';
 
@@ -17,7 +17,7 @@ import { AuthStateService } from '../../services/auth-state.services';
 })
 export class SetEmployeePasswordComponent implements OnInit {
 
-    private token!: string;
+    public token: string ='';
     public passwordForm!: FormGroup;
     formValueSignal!: Signal<any>;
   
@@ -25,6 +25,7 @@ export class SetEmployeePasswordComponent implements OnInit {
     private authStateService: AuthStateService,
     private confirmService: ConfirmationService,
     private alertService: AlertService,
+    private router: Router,
     private route: ActivatedRoute) {
     this.passwordForm = this.fb.group({
       password: ['', Validators.required],
@@ -37,10 +38,27 @@ export class SetEmployeePasswordComponent implements OnInit {
 
   
   ngOnInit(): void {
-    this.token = this.route.snapshot.params['token'];
+    this.token = this.route.snapshot.queryParamMap.get('token')!;
+    console.log('TOKEN:', this.token);
   }
 
-  addEmployee(){}
+  setPassword(){
+    const payload = {
+      token: this.token,
+      password: this.formValueSignal().password
+    }
+
+    this.authStateService.setEmployeePassword(payload.token, payload.password).subscribe({
+      next: () => {
+        this.alertService.showSuccessToast('Password set successfully');
+        this.router.navigate(['/sign-in']);
+      },
+      error: () => {
+        this.alertService.showErrorToast('Failed to set password');
+      }
+    })
+    
+  }
 
   
 }

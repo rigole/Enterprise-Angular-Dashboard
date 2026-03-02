@@ -36,4 +36,20 @@ export class AuthStateService {
       })
      )
     }
+
+    setEmployeePassword(token: string, password: string): Observable<any> {
+      this._loading.set(true);
+      this._error.set(null);
+
+      return this.api.setEmployeePassword(token, password).pipe(
+        tap(() => {
+          this._loading.set(false);
+        }),
+        catchError((error) => {
+          this._error.set('Failed to set employee password');
+          this._loading.set(false);
+          return of(error)
+        })
+      )
+    }
   }

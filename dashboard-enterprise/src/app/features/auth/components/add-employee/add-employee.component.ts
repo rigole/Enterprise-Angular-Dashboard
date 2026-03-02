@@ -6,7 +6,7 @@ import { ConfirmationService } from 'primeng/api';
 import { AuthStateService } from '../../services/auth-state.services';
 import { AlertService } from '../../../../shared/utils/alert.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { label } from '@primeuix/themes/aura/metergroup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -24,7 +24,8 @@ export class AddEmployeeComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private authStateService: AuthStateService,
     private confirmService: ConfirmationService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private router: Router) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -60,9 +61,11 @@ export class AddEmployeeComponent implements OnInit {
       },
       accept: () => {
         this.authStateService.addEmployee(this.formValueSignal()).subscribe({
-          next: () => {
+          next: (res: any) => {
+            const token = res.token;
+            console.log("tken", token)
             this.alertService.showSuccessToast('Employee added successfully');
-            //this.router.navigate(['/set-employee-password', this.formValueSignal().token]);
+               this.router.navigate(['auth/set-employee-password', token]);
             this.userForm.reset();  
           },
           error: () => {
@@ -77,3 +80,5 @@ export class AddEmployeeComponent implements OnInit {
   }
 
 }
+
+

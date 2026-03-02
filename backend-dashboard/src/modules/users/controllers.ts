@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { UserService } from "./service";
-
+import { Jwt } from "jsonwebtoken";
+import { env } from "../../config/env";
 const userService = new UserService();
+import jwt from 'jsonwebtoken';
 
 
 export const getAllUsers = async (req: Request, res: Response) => {
@@ -32,9 +34,13 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const employee = req.body;
         const result = await userService.createUser(employee);
-        res.status(201).json(result);
+        const activationToken = jwt.sign({ email: employee.email },env.JWT_SECRET,{ expiresIn: '24h' });
+        res.status(201).json({
+            result: result,
+            token: activationToken 
+        });
     } catch (error) {
-        console.error(error);
+        console.log(error);
         res.status(500).json({ error: 'Internal server error' });
     }
 }
