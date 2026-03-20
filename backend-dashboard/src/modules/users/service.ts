@@ -32,20 +32,23 @@ export class UserService {
             RETURNING *`,
             [employee.firstName, employee.lastName, employee.hiringDate, employee.dateOfBirth, employee.profession, employee.phone, employee.email, "employee", new Date(), "", activation_token]
         );
+        console.log("results", result.rows[0]);
         return result.rows[0];
     }
 
-    async setEmployeePassword(token: string, password: string): Promise<Employee | null> {
+    async setEmployeePassword(token: string, password: string) {
+        console.log("token service", token);
+        console.log("password service", password);
         const hashedPassword = await bcrypt.hash(password, 10);
         const result = await db.query<Employee>(
             `UPDATE employees
-            SET password = $1,
-            activation_token = NULL
+            SET password = $1
             WHERE activation_token = $2
             RETURNING *`,
             [hashedPassword, token]
-        );
+        ); 
         return result.rows[0];
+    
     }
 
 }

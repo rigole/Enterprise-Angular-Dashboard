@@ -4,18 +4,19 @@ import { Employee } from "../../../shared/utils/model/Employee";
 
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AuthService {
-     private readonly baseUrl = 'http://localhost:3000';
+    private readonly baseUrl = 'http://localhost:3000';
 
-    constructor(private http: HttpClient) {}
-    
+    constructor(private http: HttpClient) { }
+
     addEmployee(employee: Employee) {
         return this.http.post(`${this.baseUrl}/add/employee`, employee);
     }
 
     setEmployeePassword(token: string, password: string) {
-        return this.http.post(`${this.baseUrl}/set-employee-password`, { token, password });
+        return this.http.post(`${this.baseUrl}/set/employee/password`, { token, password });
     }
+
 }

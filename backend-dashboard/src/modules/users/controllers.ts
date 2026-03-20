@@ -34,10 +34,10 @@ export const createUser = async (req: Request, res: Response) => {
     try {
         const employee = req.body;
         const result = await userService.createUser(employee);
-        const activationToken = jwt.sign({ email: employee.email },env.JWT_SECRET,{ expiresIn: '24h' });
+        const activationToken = result.activation_token;
         res.status(201).json({
             result: result,
-            token: activationToken 
+            token: activationToken
         });
     } catch (error) {
         console.log(error);
@@ -48,7 +48,9 @@ export const createUser = async (req: Request, res: Response) => {
 export const setEmployeePassword = async (req: Request, res: Response) => {
     try {
         const { token, password } = req.body;
-        const result = await userService.setEmployeePassword(token, password);
+        console.log("token backend", token);
+        console.log("password backebnd", password);
+         const result = await userService.setEmployeePassword(token, password);
         if (!result) {
             return res.status(404).json({ error: 'User not found' });
         }
