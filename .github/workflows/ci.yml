@@ -9,7 +9,7 @@ on:
 
 jobs:
   check-angular:
-    name: Angular — Lint & Build
+    name: Angular — Build check
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +30,7 @@ jobs:
         run: npm run build -- --configuration production
 
   check-node:
-    name: Node.js — Lint & Build
+    name: Node.js — Build check
     runs-on: ubuntu-latest
 
     steps:
