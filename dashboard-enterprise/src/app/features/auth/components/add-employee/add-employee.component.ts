@@ -63,7 +63,6 @@ export class AddEmployeeComponent implements OnInit {
         this.authStateService.addEmployee(this.formValueSignal()).subscribe({
           next: (res: any) => {
             const token = res.token;
-            console.log("tken", token)
             this.alertService.showSuccessToast('Employee added successfully');
                this.router.navigate(['auth/set-employee-password', token]);
             this.userForm.reset();  

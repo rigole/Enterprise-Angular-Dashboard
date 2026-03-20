@@ -1,5 +1,5 @@
 export interface Employee {
-  [x: string]: any;
+   [x: string]: any;
   id: string | null;
   email: string;
   role: string;

@@ -48,8 +48,6 @@ export const createUser = async (req: Request, res: Response) => {
 export const setEmployeePassword = async (req: Request, res: Response) => {
     try {
         const { token, password } = req.body;
-        console.log("token backend", token);
-        console.log("password backebnd", password);
          const result = await userService.setEmployeePassword(token, password);
         if (!result) {
             return res.status(404).json({ error: 'User not found' });
