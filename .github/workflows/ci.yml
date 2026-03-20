@@ -1,0 +1,62 @@
+name: CI — Check Angular & Node.js
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-angular:
+    name:  Angular — Lint & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: dashboard-enterprise/package-lock.json
+      - name: Install dependencies
+        working-directory: dashboard-enterprise
+        run: npm ci
+      - name: Run Lint
+        working-directory: dashboard-enterprise
+        run: npm run lint
+      - name: Build Angular app
+        working-directory: dashboard-enterprise
+        run: npm run build -- --configuration production
+
+
+
+  check-node:
+    name:  Node.js — Lint & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: backend-dashboard/package-lock.json
+
+      - name: Install dependencies
+        working-directory: backend-dashboard
+        run: npm ci
+
+      - name: Run Lint
+        working-directory: backend-dashboard
+        run: npm run lint
+
+      - name: TypeScript check
+        working-directory: backend-dashboard
+        run: npm run build
