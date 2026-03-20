@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal } from '@angular/core';
+import { Component, computed, OnInit, Signal } from '@angular/core';
 import { MODULES_IMPORTS } from '../../../../shared/utils/primeng-imports';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -6,7 +6,7 @@ import { ConfirmationService } from 'primeng/api';
 import { AuthStateService } from '../../services/auth-state.services';
 import { AlertService } from '../../../../shared/utils/alert.service';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { label } from '@primeuix/themes/aura/metergroup';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-employee',
@@ -20,10 +20,12 @@ import { label } from '@primeuix/themes/aura/metergroup';
 export class AddEmployeeComponent implements OnInit {
   public userForm!: FormGroup;
   formValueSignal!: Signal<any>;
+  
   constructor(private fb: FormBuilder,
     private authStateService: AuthStateService,
     private confirmService: ConfirmationService,
-    private alertService: AlertService) {
+    private alertService: AlertService,
+    private router: Router) {
     this.userForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -36,6 +38,7 @@ export class AddEmployeeComponent implements OnInit {
     this.formValueSignal = toSignal(this.userForm.valueChanges, {
       initialValue: this.userForm.value
     });
+    
   }
 
   ngOnInit() { }
@@ -57,7 +60,17 @@ export class AddEmployeeComponent implements OnInit {
         outlined: true
       },
       accept: () => {
-        this.authStateService.addEmployee(this.formValueSignal())
+        this.authStateService.addEmployee(this.formValueSignal()).subscribe({
+          next: (res: any) => {
+            const token = res.token;
+            this.alertService.showSuccessToast('Employee added successfully');
+               this.router.navigate(['auth/set-employee-password', token]);
+            this.userForm.reset();  
+          },
+          error: () => {
+            this.alertService.showErrorToast('Failed to add employee');
+          }
+        })
       },
       reject: () => {
         this.alertService.showErrorToast('Failed to add employee');
@@ -66,3 +79,5 @@ export class AddEmployeeComponent implements OnInit {
   }
 
 }
+
+

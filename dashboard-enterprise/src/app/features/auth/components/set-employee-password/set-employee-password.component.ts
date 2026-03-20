@@ -1,0 +1,75 @@
+import { Component, OnInit, Signal } from '@angular/core';
+import { MODULES_IMPORTS } from '../../../../shared/utils/primeng-imports';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AlertService } from '../../../../shared/utils/alert.service';
+import { AuthStateService } from '../../services/auth-state.services';
+import { switchMap } from 'rxjs';
+
+@Component({
+  selector: 'app-set-employee-password',
+  imports: [MODULES_IMPORTS, ConfirmDialogModule],
+  providers: [ConfirmationService],
+  templateUrl: './set-employee-password.component.html',
+  styleUrl: './set-employee-password.component.scss'
+})
+export class SetEmployeePasswordComponent implements OnInit {
+
+  public token: string = '';
+  public passwordForm!: FormGroup;
+  formValueSignal!: Signal<any>;
+
+  constructor(private fb: FormBuilder,
+    private authStateService: AuthStateService,
+    private confirmService: ConfirmationService,
+    private alertService: AlertService,
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.passwordForm = this.fb.group({
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    })
+    this.formValueSignal = toSignal(this.passwordForm.valueChanges, {
+      initialValue: this.passwordForm.value
+    });
+  }
+
+
+  ngOnInit(): void {
+    this.token = this.route.snapshot.params['token'];
+    console.log('TOKEN:', this.token);
+    this.route.paramMap.pipe(
+      switchMap(params => {
+        this.token = params.get('token')!;
+        return (this.token);
+      })
+    )
+
+    console.log("set password token", this.token);
+  }
+
+  setPassword() {
+    const payload = {
+      token: this.token,
+      password: this.formValueSignal().password
+    }
+
+    console.log("payload", payload);
+
+    this.authStateService.setEmployeePassword(payload.token, payload.password).subscribe({
+      next: () => {
+        this.alertService.showSuccessToast('Password set successfully');
+       // this.router.navigate(['/sign-in']);
+      },
+      error: () => {
+        this.alertService.showErrorToast('Failed to set password');
+      }
+    })
+
+  }
+
+
+}

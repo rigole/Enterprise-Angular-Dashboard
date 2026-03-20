@@ -1,6 +1,7 @@
 import { Routes } from "@angular/router";
 import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { AddEmployeeComponent } from "./components/add-employee/add-employee.component";
+import { SetEmployeePasswordComponent } from "./components/set-employee-password/set-employee-password.component";
 
 
 export const usersRoutes: Routes = [
@@ -13,6 +14,11 @@ export const usersRoutes: Routes = [
         path: 'add-employee',
         loadComponent: () => import('./components/add-employee/add-employee.component')
             .then((m) => m.AddEmployeeComponent)
+    },
+    {
+        path: 'set-employee-password/:token',
+        loadComponent: () => import('./components/set-employee-password/set-employee-password.component')
+            .then((m) => m.SetEmployeePasswordComponent)
     }
 ]
 

@@ -2,6 +2,7 @@ import {Injectable, computed, signal } from "@angular/core";
 import { AuthService } from "./auth.service";
 import { Employee } from "../../../shared/utils/model/Employee";
 import { AlertService } from "../../../shared/utils/alert.service";
+import { catchError, Observable, of, tap } from "rxjs";
 
 
 @Injectable({
@@ -19,23 +20,36 @@ export class AuthStateService {
     constructor(private api: AuthService, private alertService: AlertService) {}
 
 
-    addEmployee(employee: Employee) {
+    addEmployee(employee: Employee): Observable<Employee> {
     this._loading.set(true);
     this._error.set(null);
 
-    this.api.addEmployee(employee).subscribe({
-      next: (newEmployee: any) => {
+     return this.api.addEmployee(employee).pipe(
+      tap((newEmployee: any) => {
         this._employee.update(employees => [...employees, newEmployee]);
         this._loading.set(false);
-        this.alertService.showSuccessToast('Employee added successfully');
-      },
-      error: () => {
+      }),
+      catchError((error) => {
         this._error.set('Failed to add employee');
-        this.alertService.showErrorToast('Failed to add employee');
         this._loading.set(false);
-      }
-    });
+        return of(error)
+      })
+     )
+    }
+
+    setEmployeePassword(token: string, password: string): Observable<any> {
+      this._loading.set(true);
+      this._error.set(null);
+
+      return this.api.setEmployeePassword(token, password).pipe(
+        tap(() => {
+          this._loading.set(false);
+        }),
+        catchError((error) => {
+          this._error.set('Failed to set employee password');
+          this._loading.set(false);
+          return of(error)
+        })
+      )
+    }
   }
-
-
-}
