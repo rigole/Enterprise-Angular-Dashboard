@@ -28,7 +28,7 @@
 
 | Layer | Technology |
 |---|---|
-| Frontend | Angular 17, TypeScript, SCSS |
+| Frontend | Angular 19, TypeScript, SCSS |
 | Backend | NodeJS, TypeScript |
 | Database | PostgreSQL |
 | DevOps | Docker, GitHub Actions CI/CD |

@@ -44,7 +44,6 @@ export class AddEmployeeComponent implements OnInit {
   ngOnInit() { }
 
   addEmployee() {
-    console.log(this.formValueSignal())
     this.confirmService.confirm({
       message: 'Are you sure that you want to add this employee?',
       header: 'Confirmation',
