@@ -39,7 +39,6 @@
   cursor: pointer;
 }
 .title-signup {
-  padding-right: 3rem;
   flex: 1 1 0%;
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -81,6 +80,10 @@
   gap: 0.25rem;
 }
 
+a {
+  text-decoration: none;
+  color: #616f89;
+}
 .namefield {
   padding: 1rem;
 }
