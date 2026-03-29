@@ -19,4 +19,8 @@ export class AuthService {
         return this.http.post(`${this.baseUrl}/set/employee/password`, { token, password });
     }
 
+    login(email: string, password: string) {
+        return this.http.post(`${this.baseUrl}/login`, { email, password });
+    }
+
 }

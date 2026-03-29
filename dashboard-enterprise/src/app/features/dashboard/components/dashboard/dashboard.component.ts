@@ -1,14 +1,15 @@
 import { Component, Signal } from '@angular/core';
-import { DashboardStateService } from '../services/dashboard-state.service';
+import { DashboardStateService } from '../../services/dashboard-state.service';
 import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
-import { MODULES_IMPORTS } from '../../../shared/utils/primeng-imports';
-import { AlertService } from '../../../shared/utils/alert.service';
+import { MODULES_IMPORTS } from '../../../../shared/utils/primeng-imports';
+import { AlertService } from '../../../../shared/utils/alert.service';
+import { HeaderComponent } from '../header/header.component';
 
 
 @Component({
   selector: 'app-dashboard',
-  imports: [MODULES_IMPORTS],
+  imports: [MODULES_IMPORTS, HeaderComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

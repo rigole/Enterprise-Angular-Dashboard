@@ -1,0 +1,11 @@
+<div class="header">
+  <span *ngIf="user() as e">Good morning {{ e.first_name }}</span>
+  <span *ngIf="!user()">
+    Welcome Guest
+  </span>
+  <div class="buttons-header">
+    <p-button [style]="{marginRight: '2em'}" label="Add Employee" routerLink="/auth/add-employee"></p-button>
+    <p-button *ngIf="!user()" [style]="{marginRight: '2em'}" label="Sign In" routerLink="/auth/sign-in"></p-button>
+    <p-button *ngIf="user()" severity="danger" label="sign Out" (onClick)="logout()"></p-button>
+  </div>
+</div>

@@ -18,7 +18,6 @@ export const signup = async (req: Request, res: Response) => {
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-
     const user = await authService.login( email, password );
     res.status(200).json(user);
   } catch (error) {

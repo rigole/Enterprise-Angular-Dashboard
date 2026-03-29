@@ -12,8 +12,10 @@ import { catchError, Observable, of, tap } from "rxjs";
 export class AuthStateService {
     private readonly _loading = signal(false)
     private readonly _employee = signal<Employee[]>([]);
+    private readonly _user = signal<any | null>(null);
     private readonly _error = signal<string | null>(null);
     readonly loading = this._loading.asReadonly();
+    readonly user = this._user.asReadonly();
     readonly employee = this._employee.asReadonly();
     readonly error = this._error.asReadonly();
 
@@ -52,4 +54,26 @@ export class AuthStateService {
         })
       )
     }
+
+    login(email: string, password: string): Observable<any> {
+      this._loading.set(true);
+      this._error.set(null);
+
+      return this.api.login(email, password).pipe(
+        tap((res: any) => {
+          this._employee.set(res.employee);
+          this._loading.set(false);
+        }),
+        catchError((error) => {
+          this._error.set('Failed to login');
+          this._loading.set(false);
+          return of(error)
+        })
+      )
+    }
+
+  logout() {
+    this._user.set(null);
+  }
+
   }

@@ -40,15 +40,12 @@ export class SetEmployeePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = this.route.snapshot.params['token'];
-    console.log('TOKEN:', this.token);
     this.route.paramMap.pipe(
       switchMap(params => {
         this.token = params.get('token')!;
         return (this.token);
       })
     )
-
-    console.log("set password token", this.token);
   }
 
   setPassword() {
@@ -56,13 +53,10 @@ export class SetEmployeePasswordComponent implements OnInit {
       token: this.token,
       password: this.formValueSignal().password
     }
-
-    console.log("payload", payload);
-
     this.authStateService.setEmployeePassword(payload.token, payload.password).subscribe({
       next: () => {
         this.alertService.showSuccessToast('Password set successfully');
-       // this.router.navigate(['/sign-in']);
+        this.router.navigate(['auth/sign-in']);
       },
       error: () => {
         this.alertService.showErrorToast('Failed to set password');
