@@ -5,7 +5,7 @@ import { db } from "../../config/database";
 
 export class AuthService {
 
-    async signup(data: UserInput) {
+  async signup(data: UserInput) {
     const hashedPassword = await bcrypt.hash(data.password, 10);
 
     const result = await db.query(
@@ -21,25 +21,24 @@ export class AuthService {
   async login(email: string, password: string) {
     const user = await db.query(
       `SELECT *
-       FROM users
+       FROM employees
        WHERE email = $1`,
       [email]
     );
-
     if (!user.rows[0]) {
       throw new Error('User not found');
     }
 
-  const isMatch = await bcrypt.compare(password, user.rows[0].password);
+    const isMatch = await bcrypt.compare(password, user.rows[0].password);
 
-  if (!isMatch) {
-    throw new Error('Invalid password');
-  }
+    if (!isMatch) {
+      throw new Error('Invalid password');
+    }
 
     const token = jwt.sign(
       { userId: user.rows[0].id, role: user.rows[0].role },
       process.env.JWT_SECRET as string,
-      { expiresIn:'1d' }
+      { expiresIn: '1d' }
     );
 
     return {
@@ -47,9 +46,10 @@ export class AuthService {
       user: {
         id: user.rows[0].id,
         email: user.rows[0].email,
+        firstName: user.rows[0].first_name,
         role: user.rows[0].role
       }
     };
   }
-  
+
 }

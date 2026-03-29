@@ -61,7 +61,7 @@ export class AuthStateService {
 
       return this.api.login(email, password).pipe(
         tap((res: any) => {
-          this._employee.set(res.employee);
+          this._user.set(res.user);
           this._loading.set(false);
         }),
         catchError((error) => {

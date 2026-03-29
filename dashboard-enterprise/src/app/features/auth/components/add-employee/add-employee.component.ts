@@ -63,7 +63,7 @@ export class AddEmployeeComponent implements OnInit {
           next: (res: any) => {
             const token = res.token;
             this.alertService.showSuccessToast('Employee added successfully');
-               this.router.navigate(['auth/set-employee-password', token]);
+            this.router.navigate(['auth/set-employee-password', token]);
             this.userForm.reset();  
           },
           error: () => {

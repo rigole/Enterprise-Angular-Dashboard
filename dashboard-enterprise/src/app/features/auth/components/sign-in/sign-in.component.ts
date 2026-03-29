@@ -6,6 +6,7 @@ import { ConfirmationService } from 'primeng/api';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { AuthStateService } from '../../services/auth-state.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -22,7 +23,8 @@ export class SignInComponent {
     private fb: FormBuilder,
     private confirmService: ConfirmationService,
     private alertService: AlertService,
-    private authStateService: AuthStateService
+    private authStateService: AuthStateService,
+    private router: Router
   ) { 
        this.userForm = this.fb.group({
         email: ['', [Validators.required, Validators.email]],
@@ -48,6 +50,7 @@ export class SignInComponent {
       }
 
       this.alertService.showSuccessToast('Login successful');
+      this.router.navigate(['']);
     },
     error: (err) => {
       console.log('LOGIN ERROR:', err);
